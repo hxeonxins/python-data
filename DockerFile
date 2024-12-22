@@ -1,0 +1,15 @@
+# 1. 베이스 이미지로 Python 3.9 버전 사용
+FROM python:3.9-slim
+
+# 2. 작업 디렉토리 생성 및 설정
+WORKDIR /app
+
+# 3. 로컬 디렉토리의 파일들을 컨테이너의 /app 디렉토리로 복사
+COPY . /app/
+
+# 4. 필요한 파이썬 패키지 설치
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# 5. FastAPI 앱을 실행할 때 사용할 명령어
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
